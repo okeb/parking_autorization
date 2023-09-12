@@ -19,7 +19,7 @@ from streamlit_text_rating.st_text_rater import st_text_rater
 INPUT_WIDTH =  640
 INPUT_HEIGHT = 640
 
-
+st.set_option('browser.gatherUsageStats', False)
 # Charger le modèle YOLOv5
 net = cv2.dnn.readNetFromONNX('./model/best.onnx')
 net.setPreferableBackend(cv2.dnn.DNN_BACKEND_OPENCV)
