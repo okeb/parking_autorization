@@ -14,12 +14,12 @@ opencv-python-headless = "^4.8.0.76"
 pytesseract = "^0.3.10"
 opencv-python = "^4.8.0.76"
 matplotlib = "^3.7.3"
-torch = "^2.0.1"
 tesseract = "^0.1.3"
 streamlit-extras = "^0.3.2"
 markdownlit = "^0.0.7"
 streamlit-toggle-switch = "^1.0.2"
 streamlit-text-rating = "^0.1.5"
+torch = "^2.0.1"
 
 
 [build-system]
