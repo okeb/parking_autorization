@@ -19,8 +19,7 @@ from streamlit_text_rating.st_text_rater import st_text_rater
 INPUT_WIDTH =  640
 INPUT_HEIGHT = 640
 
-st.set_option('browser.gatherUsageStats', False)
-# Charger le modèle YOLOv5
+# load YOLOv5 model
 net = cv2.dnn.readNetFromONNX('./model/best.onnx')
 net.setPreferableBackend(cv2.dnn.DNN_BACKEND_OPENCV)
 net.setPreferableTarget(cv2.dnn.DNN_TARGET_CPU)
@@ -31,7 +30,7 @@ def hash_cv2(net):
 
 @st.cache_data(hash_funcs={cv2.dnn.Net:hash_cv2})
 def get_detections(img, net):
-    # 1.CONVERT IMAGE TO YOLO FORMAT
+    # 1.convert image to yolo model
     image = img.copy()
     row, col, d = image.shape
 
@@ -39,7 +38,7 @@ def get_detections(img, net):
     input_image = np.zeros((max_rc,max_rc,3),dtype=np.uint8)
     input_image[0:row,0:col] = image
 
-    # 2. GET PREDICTION FROM YOLO MODEL
+    # 2.get prediction for yolo model
     blob = cv2.dnn.blobFromImage(input_image, 1/255, (INPUT_WIDTH, INPUT_HEIGHT), swapRB=True, crop=False)
     net.setInput(blob)
     preds = net.forward()
@@ -52,7 +51,7 @@ def get_detections(img, net):
 @st.cache_data
 def non_maximum_supression(input_image, detections):
 
-    # 3. FILTER DETECTIONS BASED ON CONFIDENCE AND PROBABILIY SCORE
+    # 3. Ffilter detection
 
     # center x, center y, w , h, conf, proba
     boxes = []
@@ -79,11 +78,11 @@ def non_maximum_supression(input_image, detections):
                 confidences.append(confidence)
                 boxes.append(box)
 
-    # 4.1 CLEAN
+    # 4.1 clear
     boxes_np = np.array(boxes).tolist()
     confidences_np = np.array(confidences).tolist()
 
-    # 4.2 NMS
+    # 4.2 nms
     index = cv2.dnn.NMSBoxes(boxes_np, confidences_np, 0.25, 0.45)
 
     return boxes_np, confidences_np, index
@@ -140,13 +139,13 @@ def yolo_predictions(img, net):
 
 @st.cache_data
 def clean_license(licence):
-    # Remplacer 'i' par 1
+    # Replace 'i' by 1
     licence = licence.replace('i', '1')
 
-    # Remplacer ';' et '.' par des espaces
+    # replace ';' and '.' by des spaces
     licence = licence.replace(';', '').replace('.', '').replace('[', '').replace(']', '').replace('(', '').replace(')', '').replace('- ', '-').replace(' -', '-')
 
-    # Supprimer les espaces au début et à la fin
+    # Remove spaces around license
     licence = licence.strip().upper()
 
     return licence
