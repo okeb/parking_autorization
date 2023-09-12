@@ -7,7 +7,6 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.10"
-streamlit = "^1.26.0"
 onnx = "^1.14.1"
 onnxruntime = "^1.15.1"
 opencv-python-headless = "^4.8.0.76"
@@ -20,6 +19,7 @@ markdownlit = "^0.0.7"
 streamlit-toggle-switch = "^1.0.2"
 streamlit-text-rating = "^0.1.5"
 torch = "^2.0.1"
+streamlit = {extras = ["cuda"], version = "^1.26.0"}
 
 
 [build-system]
