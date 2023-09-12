@@ -1,0 +1,27 @@
+[tool.poetry]
+name = "ap-hp parking autorization"
+version = "0.1.0"
+description = "Système de gestion des autorisation d'accès au parking privée de l'AP-HP via reconnaissance de plaque d'immatriculation par IA"
+authors = ["Olivier BILE <oliver.keb@icloud.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+streamlit = "^1.26.0"
+onnx = "^1.14.1"
+onnxruntime = "^1.15.1"
+opencv-python-headless = "^4.8.0.76"
+pytesseract = "^0.3.10"
+opencv-python = "^4.8.0.76"
+matplotlib = "^3.7.3"
+torch = "^2.0.1"
+tesseract = "^0.1.3"
+streamlit-extras = "^0.3.2"
+markdownlit = "^0.0.7"
+streamlit-toggle-switch = "^1.0.2"
+streamlit-text-rating = "^0.1.5"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
